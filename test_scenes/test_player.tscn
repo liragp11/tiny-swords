@@ -1,7 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddggm751mf1qa"]
+[gd_scene load_steps=8 format=3 uid="uid://ddggm751mf1qa"]
 
 [ext_resource type="Texture2D" uid="uid://de6n8g51iou8m" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_l70dw"]
 [ext_resource type="PackedScene" uid="uid://cgs1lpw23y7xy" path="res://player/player.tscn" id="2_g1ol8"]
+[ext_resource type="PackedScene" uid="uid://bs48w7kkvtydl" path="res://Systems/mob_spawner.tscn" id="3_4eb8f"]
+[ext_resource type="PackedScene" uid="uid://b0xgysmbsvc6g" path="res://misc/ritual.tscn" id="4_b050l"]
+[ext_resource type="PackedScene" uid="uid://bf1hxlrke4md4" path="res://misc/skull.tscn" id="4_roai3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_44kyh"]
 font_size = 26
@@ -106,3 +109,11 @@ label_settings = SubResource("LabelSettings_44kyh")
 [node name="Player" parent="." instance=ExtResource("2_g1ol8")]
 position = Vector2(532, 328)
 motion_mode = 1
+ritual_damage = 5
+ritual_interval = 15.0
+ritual_scene = ExtResource("4_b050l")
+death_prefab = ExtResource("4_roai3")
+
+[node name="MobSpawner" parent="." instance=ExtResource("3_4eb8f")]
+position = Vector2(527, 323)
+mobs_per_minute = 30.0

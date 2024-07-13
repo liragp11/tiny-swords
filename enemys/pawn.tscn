@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://n8qah1guoqbc"]
+
+[ext_resource type="Texture2D" uid="uid://s6ihgn6i2aai" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="1_0o317"]
+[ext_resource type="Script" path="res://enemys/enemy.gd" id="1_6imar"]
+[ext_resource type="Script" path="res://enemys/behaviors/follow_player.gd" id="1_w60n8"]
+[ext_resource type="PackedScene" uid="uid://bf1hxlrke4md4" path="res://misc/skull.tscn" id="2_tgbgv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dg8m6"]
+atlas = ExtResource("1_0o317")
+region = Rect2(0, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s7qei"]
+atlas = ExtResource("1_0o317")
+region = Rect2(192, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_trof4"]
+atlas = ExtResource("1_0o317")
+region = Rect2(384, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxuvx"]
+atlas = ExtResource("1_0o317")
+region = Rect2(576, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hthwp"]
+atlas = ExtResource("1_0o317")
+region = Rect2(768, 192, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftyno"]
+atlas = ExtResource("1_0o317")
+region = Rect2(960, 192, 192, 192)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l2dn5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dg8m6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s7qei")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_trof4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fxuvx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hthwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftyno")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggacd"]
+radius = 18.0
+height = 52.0
+
+[node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_6imar")
+health = 4
+death_prefab = ExtResource("2_tgbgv")
+skull_color = Color(0.789291, 0.661743, 0.536239, 1)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -26)
+sprite_frames = SubResource("SpriteFrames_l2dn5")
+autoplay = "default"
+frame_progress = 0.208743
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -26)
+shape = SubResource("CapsuleShape2D_ggacd")
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("1_w60n8")
+speed = 0.75
