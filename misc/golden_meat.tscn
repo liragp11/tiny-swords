@@ -1,0 +1,94 @@
+[gd_scene load_steps=15 format=3 uid="uid://ct06o684k3mma"]
+
+[ext_resource type="Texture2D" uid="uid://p6v6hv55glqp" path="res://addons/Tiny Swords/Resources/Resources/M_Spawn.png" id="1_hsxdj"]
+[ext_resource type="Script" path="res://misc/life_regenerator.gd" id="2_dty4i"]
+[ext_resource type="AudioStream" uid="uid://i223pj775q6v" path="res://addons/audio/sfx/misc/DROP_GOLDEN_MEAT1.mp3" id="3_2l7gy"]
+[ext_resource type="AudioStream" uid="uid://y66jsqb4lr21" path="res://addons/audio/sfx/misc/DROP_GOLDEN_MEAT2.mp3" id="4_vvmak"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1q27t"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44cdl"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kee4"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o8lh"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xth2e"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_afp5s"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cglmv"]
+atlas = ExtResource("1_hsxdj")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_illac"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1q27t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44cdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1kee4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4o8lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xth2e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_afp5s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cglmv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sn5yl"]
+radius = 29.0172
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_osjmh"]
+streams_count = 2
+stream_0/stream = ExtResource("3_2l7gy")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_vvmak")
+stream_1/weight = 1.0
+
+[node name="Meat" type="AnimatedSprite2D"]
+self_modulate = Color(2.5, 1.5, 0.64, 1)
+position = Vector2(0, -53)
+scale = Vector2(1.5, 1.5)
+sprite_frames = SubResource("SpriteFrames_illac")
+autoplay = "default"
+frame = 6
+frame_progress = 1.0
+script = ExtResource("2_dty4i")
+regeneration_amount = 100
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2, 14)
+shape = SubResource("CircleShape2D_sn5yl")
+
+[node name="DropAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_osjmh")

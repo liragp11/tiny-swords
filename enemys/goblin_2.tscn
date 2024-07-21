@@ -1,0 +1,136 @@
+[gd_scene load_steps=19 format=3 uid="uid://cdtdwhiot2ubm"]
+
+[ext_resource type="Script" path="res://enemys/enemy.gd" id="1_8l880"]
+[ext_resource type="PackedScene" uid="uid://w24rpiykejjy" path="res://misc/giant_skull.tscn" id="2_bw0vx"]
+[ext_resource type="PackedScene" uid="uid://ct06o684k3mma" path="res://misc/golden_meat.tscn" id="3_5wsvx"]
+[ext_resource type="PackedScene" uid="uid://bo42f55sy5kmx" path="res://misc/meat.tscn" id="4_if6kl"]
+[ext_resource type="Texture2D" uid="uid://dj13l7ptip8k8" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Purple/Torch_Purple.png" id="5_jj35y"]
+[ext_resource type="Script" path="res://enemys/behaviors/follow_player.gd" id="6_k47cl"]
+[ext_resource type="AudioStream" uid="uid://ci8af0fuhyb6n" path="res://addons/audio/sfx/enemies/goblin/MOB-GIANT-WALK1.wav" id="7_3yeah"]
+[ext_resource type="AudioStream" uid="uid://chciq1qqlr1gb" path="res://addons/audio/sfx/enemies/goblin/MOB-GIANT-WALK2.wav" id="8_ac50l"]
+[ext_resource type="AudioStream" uid="uid://da7vudwu55ajk" path="res://addons/audio/sfx/enemies/goblin/MOB-GIANT-WALK3.wav" id="9_3rvx8"]
+[ext_resource type="AudioStream" uid="uid://dp2sjos0jw6k0" path="res://addons/audio/sfx/enemies/goblin/HIT_MOB_GIANT1.wav" id="10_u4cbv"]
+[ext_resource type="AudioStream" uid="uid://y65sc1ovs4ph" path="res://addons/audio/sfx/enemies/goblin/HIT_MOB_GIANT2.wav" id="11_6qnht"]
+[ext_resource type="AudioStream" uid="uid://055bbv520bi5" path="res://addons/audio/sfx/enemies/goblin/HIT_MOB_GIANT3.wav" id="12_4dpor"]
+
+[sub_resource type="Animation" id="Animation_r6s4v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_q733c"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkAudioRandomizer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x05ow"]
+_data = {
+"RESET": SubResource("Animation_r6s4v"),
+"default": SubResource("Animation_q733c")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggacd"]
+radius = 47.0
+height = 110.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ka6co"]
+streams_count = 3
+stream_0/stream = ExtResource("7_3yeah")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_ac50l")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_3rvx8")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_2mubu"]
+streams_count = 3
+stream_0/stream = ExtResource("10_u4cbv")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_6qnht")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_4dpor")
+stream_2/weight = 1.0
+
+[node name="Goblin" type="CharacterBody2D" groups=["enemies"]]
+motion_mode = 1
+script = ExtResource("1_8l880")
+health = 6
+death_prefab = ExtResource("2_bw0vx")
+skull_color = Color(0.140539, 0.491168, 0.0361555, 1)
+drop_items = Array[PackedScene]([ExtResource("3_5wsvx"), ExtResource("4_if6kl")])
+drop_chance = 0.2
+drop_chances = Array[float]([0.2, 0.8])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -59)
+scale = Vector2(1.80208, 1.80208)
+texture = ExtResource("5_jj35y")
+hframes = 7
+vframes = 5
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x05ow")
+}
+autoplay = "default"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -42)
+rotation = -1.57079
+shape = SubResource("CapsuleShape2D_ggacd")
+
+[node name="FollowPlayer" type="Node" parent="."]
+script = ExtResource("6_k47cl")
+speed = 0.4
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -89)
+
+[node name="WalkAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+process_mode = 4
+stream = SubResource("AudioStreamRandomizer_ka6co")
+volume_db = -10.0
+
+[node name="DamageAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_2mubu")
+volume_db = -10.0

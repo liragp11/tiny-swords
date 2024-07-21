@@ -1,12 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://cgs1lpw23y7xy"]
+[gd_scene load_steps=33 format=3 uid="uid://cgs1lpw23y7xy"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_aaxx0"]
-[ext_resource type="PackedScene" uid="uid://b0xgysmbsvc6g" path="res://misc/ritual.tscn" id="2_o6g2q"]
+[ext_resource type="PackedScene" uid="uid://b0xgysmbsvc6g" path="res://player/ritual.tscn" id="2_o6g2q"]
 [ext_resource type="Texture2D" uid="uid://losqyqj3yntl" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Blue/Warrior_Blue.png" id="3_gyudx"]
+[ext_resource type="AudioStream" uid="uid://b0a3pl2ogkgve" path="res://addons/audio/sfx/player/attack/HERO-ATK1.5.wav" id="5_0d2yd"]
+[ext_resource type="AudioStream" uid="uid://cmumw86rdqnvw" path="res://addons/audio/sfx/player/run/HERO-WALK-GRASS1.wav" id="7_rkp13"]
+[ext_resource type="AudioStream" uid="uid://djvwdo85ns65r" path="res://addons/audio/sfx/player/attack/HERO-ATK2.5.wav" id="8_2e4c2"]
+[ext_resource type="AudioStream" uid="uid://jb7gd5kit5fa" path="res://addons/audio/sfx/player/run/HERO-WALK-GRASS2.wav" id="8_bi5nd"]
+[ext_resource type="AudioStream" uid="uid://djo2njjk88exm" path="res://addons/audio/sfx/player/run/HERO-WALK-GRASS3.wav" id="9_70gny"]
+[ext_resource type="AudioStream" uid="uid://dkjq1cs7ctqyf" path="res://addons/audio/sfx/player/attack/HERO-ATK3.5.wav" id="9_bqtay"]
+[ext_resource type="AudioStream" uid="uid://lwk4uyx0we05" path="res://addons/audio/sfx/player/damage/HERO-DAMAGE1.wav" id="10_deb84"]
+[ext_resource type="AudioStream" uid="uid://d4cybx76frurj" path="res://addons/audio/sfx/player/damage/HERO-DAMAGE2.wav" id="11_0gcgr"]
+[ext_resource type="AudioStream" uid="uid://bxk8tgqimu64h" path="res://addons/audio/sfx/player/damage/HERO-DAMAGE3.wav" id="12_bfynb"]
+[ext_resource type="AudioStream" uid="uid://c7imu8v8jallj" path="res://addons/audio/sfx/misc/CATCHING_MEAT1.wav" id="13_plas3"]
+[ext_resource type="AudioStream" uid="uid://kf6b626taj8n" path="res://addons/audio/sfx/player/attack/LOADING_ULT.wav" id="14_ciivl"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_suvua"]
-radius = 16.0
-height = 62.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_qfnx2"]
+radius = 18.1108
 
 [sub_resource type="Animation" id="Animation_cfvrx"]
 length = 0.001
@@ -53,6 +63,20 @@ tracks/1/keys = {
 "method": &"deal_damage_to_enemy"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer1")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_xvohw"]
 resource_name = "attack_down_2"
@@ -82,6 +106,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"deal_damage_to_enemy"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -115,6 +153,20 @@ tracks/1/keys = {
 "method": &"deal_damage_to_enemy"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer1")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_431q4"]
 resource_name = "attack_side_2"
@@ -144,6 +196,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"deal_damage_to_enemy"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -177,6 +243,20 @@ tracks/1/keys = {
 "method": &"deal_damage_to_enemy"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer1")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_sx54x"]
 resource_name = "attack_up_2"
@@ -206,6 +286,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"deal_damage_to_enemy"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Audios/AttackAudioRandomizer2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -242,6 +336,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Audios/WalkAudioRandomizer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}, {
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_323ht"]
 _data = {
@@ -262,21 +373,63 @@ radius = 124.004
 [sub_resource type="CircleShape2D" id="CircleShape2D_ybii7"]
 radius = 43.2897
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fqt6j"]
+bg_color = Color(0, 0, 0, 0.470588)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvv7d"]
+bg_color = Color(0.652262, 0.0247951, 0.0917424, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_s2x0u"]
+streams_count = 3
+stream_0/stream = ExtResource("7_rkp13")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_bi5nd")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_70gny")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uni4w"]
+streams_count = 3
+stream_0/stream = ExtResource("10_deb84")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("11_0gcgr")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("12_bfynb")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8pjn8"]
+streams_count = 3
+stream_0/stream = ExtResource("5_0d2yd")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("8_2e4c2")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("9_bqtay")
+stream_2/weight = 1.0
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_aaxx0")
+ritual_scene = ExtResource("2_o6g2q")
 death_prefab = ExtResource("2_o6g2q")
 skull_color = Color(0.679051, 0.854698, 1, 1)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -27)
-shape = SubResource("CapsuleShape2D_suvua")
-debug_color = Color(0, 0.6, 0.701961, 0.239216)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -29)
 texture = ExtResource("3_gyudx")
 hframes = 6
 vframes = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -15)
+shape = SubResource("CircleShape2D_qfnx2")
+debug_color = Color(0, 0.6, 0.701961, 0.239216)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -297,3 +450,38 @@ debug_color = Color(1, 0, 0.145098, 0.0313726)
 position = Vector2(0, -27)
 shape = SubResource("CircleShape2D_ybii7")
 debug_color = Color(0.972549, 0, 0.443137, 0.0705882)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -39.0
+offset_top = 14.0
+offset_right = 39.0
+offset_bottom = 22.0
+theme_override_styles/background = SubResource("StyleBoxFlat_fqt6j")
+theme_override_styles/fill = SubResource("StyleBoxFlat_mvv7d")
+value = 80.0
+rounded = true
+show_percentage = false
+
+[node name="Audios" type="Node2D" parent="."]
+
+[node name="WalkAudioRandomizer" type="AudioStreamPlayer2D" parent="Audios"]
+stream = SubResource("AudioStreamRandomizer_s2x0u")
+volume_db = -10.0
+
+[node name="DamageAudioRandomizer" type="AudioStreamPlayer2D" parent="Audios"]
+stream = SubResource("AudioStreamRandomizer_uni4w")
+volume_db = -6.0
+
+[node name="AttackAudioRandomizer1" type="AudioStreamPlayer2D" parent="Audios"]
+stream = SubResource("AudioStreamRandomizer_8pjn8")
+volume_db = -10.0
+
+[node name="AttackAudioRandomizer2" type="AudioStreamPlayer2D" parent="Audios"]
+stream = SubResource("AudioStreamRandomizer_8pjn8")
+volume_db = -10.0
+
+[node name="HealAudioRandomizer" type="AudioStreamPlayer2D" parent="Audios"]
+stream = ExtResource("13_plas3")
+
+[node name="LoadingRitualAudio" type="AudioStreamPlayer2D" parent="Audios"]
+stream = ExtResource("14_ciivl")

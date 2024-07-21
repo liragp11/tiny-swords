@@ -1,9 +1,9 @@
 [gd_scene load_steps=6 format=3 uid="uid://bs48w7kkvtydl"]
 
 [ext_resource type="Script" path="res://Systems/mob_spawner.gd" id="1_n6awe"]
-[ext_resource type="PackedScene" uid="uid://dxurgafwbmpsj" path="res://enemys/goblin.tscn" id="2_v6lap"]
 [ext_resource type="PackedScene" uid="uid://n8qah1guoqbc" path="res://enemys/pawn.tscn" id="3_uac4a"]
 [ext_resource type="PackedScene" uid="uid://co5b41tn0ak2t" path="res://enemys/sheep.tscn" id="4_eamhp"]
+[ext_resource type="PackedScene" uid="uid://cdtdwhiot2ubm" path="res://enemys/goblin_2.tscn" id="4_h4bch"]
 
 [sub_resource type="Curve2D" id="Curve2D_hqay5"]
 _data = {
@@ -14,7 +14,7 @@ point_count = 6
 [node name="MobSpawner" type="Node2D"]
 position = Vector2(598, 344)
 script = ExtResource("1_n6awe")
-creatures = Array[PackedScene]([ExtResource("2_v6lap"), ExtResource("3_uac4a"), ExtResource("4_eamhp")])
+creatures = Array[PackedScene]([ExtResource("3_uac4a"), ExtResource("4_eamhp"), ExtResource("4_h4bch")])
 
 [node name="Path2D" type="Path2D" parent="."]
 curve = SubResource("Curve2D_hqay5")

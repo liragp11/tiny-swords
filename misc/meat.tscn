@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bo42f55sy5kmx"]
+[gd_scene load_steps=16 format=3 uid="uid://bo42f55sy5kmx"]
 
 [ext_resource type="Texture2D" uid="uid://p6v6hv55glqp" path="res://addons/Tiny Swords/Resources/Resources/M_Spawn.png" id="1_2o8ll"]
 [ext_resource type="Script" path="res://misc/life_regenerator.gd" id="2_mfe7s"]
+[ext_resource type="AudioStream" uid="uid://be562srpxbfmb" path="res://addons/audio/sfx/misc/DROP_MEAT1.wav" id="3_8tft6"]
+[ext_resource type="AudioStream" uid="uid://g4jbm6njcxgt" path="res://addons/audio/sfx/misc/DROP_MEAT2.wav" id="4_ylvqa"]
+[ext_resource type="AudioStream" uid="uid://cfxq56r7elmwd" path="res://addons/audio/sfx/misc/DROP_MEAT3.wav" id="5_hjn78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1q27t"]
 atlas = ExtResource("1_2o8ll")
@@ -63,6 +66,15 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_sn5yl"]
 radius = 29.0172
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_f0ghw"]
+streams_count = 3
+stream_0/stream = ExtResource("3_8tft6")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("4_ylvqa")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("5_hjn78")
+stream_2/weight = 1.0
+
 [node name="Meat" type="AnimatedSprite2D"]
 position = Vector2(0, -33)
 sprite_frames = SubResource("SpriteFrames_illac")
@@ -76,3 +88,6 @@ script = ExtResource("2_mfe7s")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(2, 14)
 shape = SubResource("CircleShape2D_sn5yl")
+
+[node name="DropAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_f0ghw")

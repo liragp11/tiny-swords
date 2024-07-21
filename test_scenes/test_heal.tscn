@@ -5,18 +5,12 @@
 
 [node name="TestHeal" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_g7f1r")]
-position = Vector2(278, 245)
-health = 50
-
-[node name="Meat" parent="." instance=ExtResource("2_6x3xj")]
-position = Vector2(608, 436)
-
 [node name="Meat2" parent="." instance=ExtResource("2_6x3xj")]
 position = Vector2(908, 267)
 
-[node name="Meat3" parent="." instance=ExtResource("2_6x3xj")]
-position = Vector2(908, 440)
-
 [node name="Meat4" parent="." instance=ExtResource("2_6x3xj")]
 position = Vector2(243, 501)
+
+[node name="Player" parent="." instance=ExtResource("1_g7f1r")]
+position = Vector2(369, 210)
+health = 70

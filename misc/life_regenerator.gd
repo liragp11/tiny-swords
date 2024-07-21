@@ -1,14 +1,19 @@
 extends Node2D
 
 @export var regeneration_amount: int = 20
+@export var drop_meat: AudioStreamPlayer2D
+
+@onready var drop_audio = $DropAudioRandomizer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	drop_audio.play()
 	$Area2D.body_entered.connect(on_body_entered)
+	
 
 func on_body_entered(body: Node2D):
 	if body.is_in_group("player"):
 		var player: Player = body
 		player.heal(regeneration_amount)
+		#player.meat_collected.emit(1)
 		queue_free()
-	

@@ -1,63 +1,92 @@
-[gd_scene load_steps=13 format=3 uid="uid://n8qah1guoqbc"]
+[gd_scene load_steps=18 format=3 uid="uid://n8qah1guoqbc"]
 
 [ext_resource type="Texture2D" uid="uid://s6ihgn6i2aai" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="1_0o317"]
 [ext_resource type="Script" path="res://enemys/enemy.gd" id="1_6imar"]
 [ext_resource type="Script" path="res://enemys/behaviors/follow_player.gd" id="1_w60n8"]
 [ext_resource type="PackedScene" uid="uid://bf1hxlrke4md4" path="res://misc/skull.tscn" id="2_tgbgv"]
+[ext_resource type="PackedScene" uid="uid://bo42f55sy5kmx" path="res://misc/meat.tscn" id="3_oia35"]
+[ext_resource type="AudioStream" uid="uid://ip62l8apmqb3" path="res://addons/audio/sfx/enemies/pawn/MOB-HAIRY-WALK1.wav" id="6_awi01"]
+[ext_resource type="AudioStream" uid="uid://1oja5jguv81y" path="res://addons/audio/sfx/enemies/pawn/MOB-HAIRY-WALK2.wav" id="7_hb781"]
+[ext_resource type="AudioStream" uid="uid://c477x57ff1nnp" path="res://addons/audio/sfx/enemies/pawn/MOB-HAIRY-WALK3.wav" id="8_c2v5i"]
+[ext_resource type="AudioStream" uid="uid://hy0rr8l01ja1" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL1.wav" id="9_u2ld0"]
+[ext_resource type="AudioStream" uid="uid://bn7ugtip2woq1" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL2.wav" id="10_bes20"]
+[ext_resource type="AudioStream" uid="uid://bu1umts3ot7na" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL3.wav" id="11_tivtx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dg8m6"]
-atlas = ExtResource("1_0o317")
-region = Rect2(0, 192, 192, 192)
+[sub_resource type="Animation" id="Animation_i7u6l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(1, 0)]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_s7qei"]
-atlas = ExtResource("1_0o317")
-region = Rect2(192, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_trof4"]
-atlas = ExtResource("1_0o317")
-region = Rect2(384, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fxuvx"]
-atlas = ExtResource("1_0o317")
-region = Rect2(576, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hthwp"]
-atlas = ExtResource("1_0o317")
-region = Rect2(768, 192, 192, 192)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ftyno"]
-atlas = ExtResource("1_0o317")
-region = Rect2(960, 192, 192, 192)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_l2dn5"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dg8m6")
+[sub_resource type="Animation" id="Animation_hby6e"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 1), Vector2i(1, 1), Vector2i(2, 1), Vector2i(3, 1), Vector2i(4, 1), Vector2i(5, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WalkAudioRandomizer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s7qei")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_trof4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fxuvx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hthwp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ftyno")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
+"args": [0.0],
+"method": &"play"
 }]
+}
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ggacd"]
-radius = 18.0
-height = 52.0
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ksx3l"]
+_data = {
+"RESET": SubResource("Animation_i7u6l"),
+"default": SubResource("Animation_hby6e")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6vtjh"]
+radius = 18.0278
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_hoc85"]
+streams_count = 3
+stream_0/stream = ExtResource("6_awi01")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_hb781")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_c2v5i")
+stream_2/weight = 1.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ymyui"]
+streams_count = 3
+stream_0/stream = ExtResource("9_u2ld0")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("10_bes20")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("11_tivtx")
+stream_2/weight = 1.0
 
 [node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
@@ -65,17 +94,37 @@ script = ExtResource("1_6imar")
 health = 4
 death_prefab = ExtResource("2_tgbgv")
 skull_color = Color(0.789291, 0.661743, 0.536239, 1)
+drop_items = Array[PackedScene]([ExtResource("3_oia35")])
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -26)
-sprite_frames = SubResource("SpriteFrames_l2dn5")
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -30)
+texture = ExtResource("1_0o317")
+hframes = 6
+vframes = 6
+frame = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ksx3l")
+}
 autoplay = "default"
-frame_progress = 0.208743
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -26)
-shape = SubResource("CapsuleShape2D_ggacd")
+position = Vector2(0, -19)
+shape = SubResource("CircleShape2D_6vtjh")
 
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("1_w60n8")
 speed = 0.75
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -29)
+
+[node name="WalkAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+process_mode = 4
+stream = SubResource("AudioStreamRandomizer_hoc85")
+volume_db = -10.0
+
+[node name="DamageAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_ymyui")
+volume_db = -5.0

@@ -1,9 +1,13 @@
-[gd_scene load_steps=13 format=3 uid="uid://co5b41tn0ak2t"]
+[gd_scene load_steps=18 format=3 uid="uid://co5b41tn0ak2t"]
 
-[ext_resource type="Script" path="res://enemys/enemy.gd" id="1_gry06"]
-[ext_resource type="PackedScene" uid="uid://bf1hxlrke4md4" path="res://misc/skull.tscn" id="2_yc06l"]
+[ext_resource type="Script" path="res://enemys/enemy.gd" id="1_vvrqg"]
+[ext_resource type="PackedScene" uid="uid://bf1hxlrke4md4" path="res://misc/skull.tscn" id="2_4yyov"]
+[ext_resource type="PackedScene" uid="uid://bo42f55sy5kmx" path="res://misc/meat.tscn" id="2_gha35"]
 [ext_resource type="Texture2D" uid="uid://jqis87xpnn78" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="3_glhpo"]
 [ext_resource type="Script" path="res://enemys/behaviors/follow_player.gd" id="4_xrn1f"]
+[ext_resource type="AudioStream" uid="uid://hy0rr8l01ja1" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL1.wav" id="6_l86y3"]
+[ext_resource type="AudioStream" uid="uid://bn7ugtip2woq1" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL2.wav" id="7_8sjkt"]
+[ext_resource type="AudioStream" uid="uid://bu1umts3ot7na" path="res://addons/audio/sfx/enemies/sheep/HIT_MOB_SMALL3.wav" id="8_1lyqa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ekrm2"]
 atlas = ExtResource("3_glhpo")
@@ -59,10 +63,21 @@ animations = [{
 radius = 24.0
 height = 48.0
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_lmu0p"]
+streams_count = 3
+stream_0/stream = ExtResource("6_l86y3")
+stream_0/weight = 1.0
+stream_1/stream = ExtResource("7_8sjkt")
+stream_1/weight = 1.0
+stream_2/stream = ExtResource("8_1lyqa")
+stream_2/weight = 1.0
+
 [node name="Sheep" type="CharacterBody2D" groups=["enemies"]]
 motion_mode = 1
-script = ExtResource("1_gry06")
-death_prefab = ExtResource("2_yc06l")
+script = ExtResource("1_vvrqg")
+death_prefab = ExtResource("2_4yyov")
+drop_items = Array[PackedScene]([ExtResource("2_gha35")])
+drop_chance = 0.025
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -17)
@@ -76,3 +91,9 @@ shape = SubResource("CapsuleShape2D_ggacd")
 
 [node name="FollowPlayer" type="Node" parent="."]
 script = ExtResource("4_xrn1f")
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="DamageAudioRandomizer" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_lmu0p")
